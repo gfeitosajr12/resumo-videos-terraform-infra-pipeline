@@ -70,7 +70,7 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 
 
 resource "aws_s3_bucket_policy" "cloudfront_policy" {
-  bucket = aws_s3_bucket.my_bucket.id
+  bucket = aws_s3_bucket.bucket.bucket
 
   policy = jsonencode({
     Version = "2012-10-17",
