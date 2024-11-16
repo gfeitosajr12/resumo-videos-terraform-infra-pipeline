@@ -93,6 +93,31 @@ resource "aws_s3_bucket_policy" "cloudfront_policy" {
   })
 }
 
+resource "aws_iam_policy" "cloudfront_policy" {
+  name        = "gfeitosajr12-us-east-1-resumo-videos-cloudfront-access-policy"
+  description = "Policy to allow CloudFront OAI management"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "cloudfront:CreateCloudFrontOriginAccessIdentity",
+          "cloudfront:GetCloudFrontOriginAccessIdentity",
+          "cloudfront:ListCloudFrontOriginAccessIdentities"
+        ],
+        Resource = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:origin-access-identity/*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "attach_policy" {
+  role       = aws_iam_role.github_actions_role.name
+  policy_arn = aws_iam_policy.cloudfront_policy.arn
+}
+
 output "cloudfront_domain_name" {
   value = aws_cloudfront_distribution.distribution.domain_name
 }
