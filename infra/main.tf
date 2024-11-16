@@ -82,7 +82,7 @@ resource "aws_s3_bucket_policy" "cloudfront_policy" {
           Service = "cloudfront.amazonaws.com"
         },
         Action   = "s3:GetObject",
-        Resource = "${aws_s3_bucket.my_bucket.arn}/*",
+        Resource = "${aws_s3_bucket.bucket.arn}/*",
         Condition = {
           StringEquals = {
             "AWS:SourceArn" = aws_cloudfront_distribution.distribution.arn
