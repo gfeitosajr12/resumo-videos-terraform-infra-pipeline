@@ -107,7 +107,7 @@ resource "aws_iam_policy" "cloudfront_policy" {
           "cloudfront:GetCloudFrontOriginAccessIdentity",
           "cloudfront:ListCloudFrontOriginAccessIdentities"
         ],
-        Resource = "arn:aws:cloudfront::${data.aws_caller_identity.current.account_id}:origin-access-identity/*"
+        Resource = "*"
       }
     ]
   })
