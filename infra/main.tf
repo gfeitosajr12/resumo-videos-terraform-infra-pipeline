@@ -94,5 +94,5 @@ resource "aws_s3_bucket_policy" "cloudfront_policy" {
 }
 
 output "cloudfront_domain_name" {
-  value = aws_cloudfront_distribution.my_distribution.domain_name
+  value = aws_cloudfront_distribution.distribution.domain_name
 }
